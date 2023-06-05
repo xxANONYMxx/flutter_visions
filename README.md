@@ -1,6 +1,8 @@
 # visions
 
-A new Flutter project.
+A flutter project for the subject "Cross Plattform Entwicklung mit Flutter" at FH Hagenberg, KWM.
+The app makes use of the Google Vision AI (https://cloud.google.com/vision?hl=de) to retrieve information of pictures, that are taken with the camera of the phone.
+
 
 ## Getting Started
 
