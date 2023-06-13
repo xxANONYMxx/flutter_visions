@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557433324455",
+    "project_id": "fh-visions",
+    "storage_bucket": "fh-visions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557433324455:android:a9863990be5e067da62c82",
+        "android_client_info": {
+          "package_name": "com.example.visions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557433324455-1rddf13fdhnkuo7num2uf4fo6m8fc9nk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG93Vvue3sxO7dOBVTWX6GN3kHQ1BQAs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557433324455-1rddf13fdhnkuo7num2uf4fo6m8fc9nk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
