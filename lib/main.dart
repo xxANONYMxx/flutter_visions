@@ -1,12 +1,13 @@
 import 'package:camera/camera.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloudinary_flutter/cloudinary_context.dart';
+import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:visions/constants/credentials.dart';
 import 'package:visions/constants/routs.dart';
 import 'package:visions/firebase_options.dart';
 import 'package:visions/views/auth_view.dart';
-import 'package:visions/views/home_view.dart';
+import 'package:visions/views/gallery_view.dart';
 import 'package:visions/views/login_view.dart';
 import 'package:visions/views/picture_view.dart';
 
@@ -17,6 +18,8 @@ void main() async {
   );
   final cameras = await availableCameras();
   final firstCamera = cameras.first;
+  CloudinaryContext.cloudinary =
+      Cloudinary.fromCloudName(cloudName: CloudName, apiKey: ApiKey);
 
   runApp(MyApp(camera: firstCamera));
 }
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
         loginRoute: (context)=>const LoginView(),
         pictureRoute: (context)=> PictureView(camera:camera),
-        homeRoute: (context)=>const HomeView(),
+        galleryRoute: (context)=> const GalleryView(),
       },
     );
   }

@@ -1,3 +1,3 @@
 const loginRoute = "/login/";
-const homeRoute = "/home/";
+const galleryRoute = "/gallery/";
 const pictureRoute = "/picture/";
