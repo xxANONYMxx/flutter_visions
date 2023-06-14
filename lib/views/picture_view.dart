@@ -1,7 +1,12 @@
 import 'package:camera/camera.dart';
+import 'package:cloudinary_url_gen/transformation/effect/effect.dart';
+import 'package:cloudinary_url_gen/transformation/resize/resize.dart';
+import 'package:cloudinary_url_gen/transformation/transformation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:visions/services/auth/auth_service.dart';
+import 'package:cloudinary_flutter/image/cld_image.dart';
+import 'package:cloudinary/cloudinary.dart';
+import 'package:visions/constants/routs.dart';
 
 class PictureView extends StatefulWidget {
   final CameraDescription camera;
@@ -93,7 +98,9 @@ class _PictureViewState extends State<PictureView> {
       ),
       body: Column(
         children: [
-          Text("Logged in as " + user.email!),
+          SizedBox(
+              height: 50,
+              child: Center(child: Text("Logged in as " + user.email!))),
           FutureBuilder<void>(
             future: _initializeControllerFuture,
             builder: (context, snapshot) {
@@ -106,6 +113,7 @@ class _PictureViewState extends State<PictureView> {
               }
             },
           ),
+          TextButton(onPressed: () => {Navigator.pushNamed(context, galleryRoute)}, child: Text("Gallery")),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -119,6 +127,14 @@ class _PictureViewState extends State<PictureView> {
             // Attempt to take a picture and get the file `image`
             // where it was saved.
             final image = await _controller.takePicture();
+            // CloudinaryContext.cloudinary.uploader().upload(image);
+            Cloudinary cloudinary = Cloudinary.signedConfig(
+              apiKey: "355217681432134",
+              apiSecret: "LSbfDNUv-0lG9GpdtGX3rFbIbUU",
+              cloudName: "dzsrsvkla",
+            );
+
+            cloudinary.upload(fileBytes: await image.readAsBytes(), folder: 'flutter_cloudinary');
             
           } catch (e) {
             // If an error occurs, log the error to the console.
