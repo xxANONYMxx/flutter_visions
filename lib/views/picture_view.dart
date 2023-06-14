@@ -8,6 +8,8 @@ import 'package:cloudinary_flutter/image/cld_image.dart';
 import 'package:cloudinary/cloudinary.dart';
 import 'package:visions/constants/routs.dart';
 
+import '../constants/credentials.dart';
+
 class PictureView extends StatefulWidget {
   final CameraDescription camera;
 
@@ -96,25 +98,27 @@ class _PictureViewState extends State<PictureView> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-              height: 50,
-              child: Center(child: Text("Logged in as " + user.email!))),
-          FutureBuilder<void>(
-            future: _initializeControllerFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                // If the Future is complete, display the preview.
-                return CameraPreview(_controller);
-              } else {
-                // Otherwise, display a loading indicator.
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
-          TextButton(onPressed: () => {Navigator.pushNamed(context, galleryRoute)}, child: Text("Gallery")),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+                height: 50,
+                child: Center(child: Text("Logged in as " + user.email!))),
+            FutureBuilder<void>(
+              future: _initializeControllerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  // If the Future is complete, display the preview.
+                  return CameraPreview(_controller);
+                } else {
+                  // Otherwise, display a loading indicator.
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+            TextButton(onPressed: () => {Navigator.pushNamed(context, galleryRoute)}, child: Text("Gallery")),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         // Provide an onPressed callback.
@@ -129,9 +133,9 @@ class _PictureViewState extends State<PictureView> {
             final image = await _controller.takePicture();
             // CloudinaryContext.cloudinary.uploader().upload(image);
             Cloudinary cloudinary = Cloudinary.signedConfig(
-              apiKey: "355217681432134",
-              apiSecret: "LSbfDNUv-0lG9GpdtGX3rFbIbUU",
-              cloudName: "dzsrsvkla",
+              apiKey: ApiKey,
+              apiSecret: ApiSecret,
+              cloudName: CloudName,
             );
 
             cloudinary.upload(fileBytes: await image.readAsBytes(), folder: 'flutter_cloudinary');
